@@ -1,28 +1,37 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['Data','Login','Share'])
 
-.controller('DashCtrl', function($scope) {})
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+.controller('loginCtrl', function($scope,Login) {
+ 	$scope.facebookLogin = function() {
+        Login.checkLoginState();
+    }
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('AccountCtrl', function($scope,Login,Data,$ionicPopup) {
+	$scope.firstName = 'Ben';
+	$scope.picture = Data.picUrl;
+	$scope.logout = function() {
+	   var confirmPopup = $ionicPopup.confirm({
+	     title: 'Logout',
+	     template: 'Are you sure you want to logout?'
+	   });
+	   confirmPopup.then(function(res) {
+	     if(res) {
+	       Login.logoutParseAndFacebook();
+	     } else {
+	       console.log('User stayed logged in');
+	     }
+	   });
+	 };
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('statusCtrl', function($scope,Data,Login,$ionicScrollDelegate) {
+  $scope.loadMessage = 'Press Random Status to begin!';
+})
+
+.controller('tweetsCtrl', function($scope,Data,Login) {
+  $scope.loadMessage = 'Enter a handler to begin!';
+})
+
+.controller('makeCtrl', function($scope,Data,Login) {
+  $scope.loadMessage = 'Enter a message to begin!';
 });
