@@ -19,10 +19,6 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  <feature name="debug-server" required="true">
-    <param name="domain" value="http://localhost:8080"/>
-    <param name="key" value="1234"/>
-  </feature>
   <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
     <param name="APP_ID" value="1405020043126294" />
     <param name="APP_NAME" value="test" />
